@@ -94,7 +94,7 @@ class Config{
       $config = parse_ini_string($file, true, INI_SCANNER_NORMAL);
     }
     
-    if ($config === false || !is_array($config)) {
+    if (!isset($config) || $config === false || !is_array($config)) {
       throw new Exception(
         'Unknown error occured while parsing'
         . ($filename !== false ? ' "' . $filename . '" as' : '') . ' INI.'
