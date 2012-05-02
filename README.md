@@ -32,6 +32,14 @@ $config->parse('servers.ini');
 ```
 
 
+There's no need to fret, when simply wanting the content of the INI
+
+```php
+<?php
+$servers = $config->parse('servers.ini', true);
+```
+
+
 Parse an open stream, if you so desire.
 
 ```php
