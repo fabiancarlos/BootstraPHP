@@ -80,7 +80,7 @@ So, if you ever want to see what config is available to you.
 
 ```php
 <?php
-$availableConfig = array_keys($this->get());
+$availableConfig = array_keys($config->get());
 ```
 
 Now, because INI files should have the inherent nature of overwriting.

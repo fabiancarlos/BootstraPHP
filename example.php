@@ -46,7 +46,7 @@ $parsedFilesJSON = $config->getJSON(array('config' => 'scanned_files'));
 $allTheThings = $config->get();
 
 // So, if you ever want to see what config is available to you.
-$availableConfig = array_keys($this->get());
+$availableConfig = array_keys($config->get());
 
 // Now, because INI files should have the inherent nature of overwriting.
 // If we want to add data to a deep config setting, we'll do.
