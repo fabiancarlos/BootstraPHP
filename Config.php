@@ -27,6 +27,8 @@ class Config{
   
   /**
    * Get an instance of self.
+   *
+   * Kudos to @doenietzomoeilijk
    */
   public static function getInstance() {
     if (!isset(self::$_instance)) {
