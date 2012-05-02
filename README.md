@@ -90,7 +90,7 @@ If we want to add data to a deep config setting, we'll do:
 <?php
 $config->put(
   array_merge(
-    $this->get('servers'),
+    $config->get('servers'),
     array(
       'servers' => array(
         'script' => '10.0.0.1',

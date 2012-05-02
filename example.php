@@ -14,12 +14,14 @@ $config = Config::getInstance();
 // Right of the bat, you can use all PHP INI settings.
 $include_path = $config->get('include_path');
 
+/*
 // Parse an additional INI file, somewhere in the PHP path.
 $config->parse('servers.ini');
 
 // Parse an open stream, if you so desire.
 $input = fopen('php://input', 'r');
 $config->parse($input);
+*/
 
 // You could also choose to directly parse an INI string.
 $config->parse(
@@ -52,7 +54,7 @@ $availableConfig = array_keys($config->get());
 // If we want to add data to a deep config setting, we'll do.
 $config->put(
   array_merge(
-    $this->get('servers'),
+    $config->get('servers'),
     array(
       'servers' => array(
         'script' => '10.0.0.1',
@@ -61,3 +63,5 @@ $config->put(
     )
   )
 );
+
+var_dump($config->get('servers'));
