@@ -53,10 +53,10 @@ $availableConfig = array_keys($config->get());
 // Now, because INI files should have the inherent nature of overwriting.
 // If we want to add data to a deep config setting, we'll do.
 $config->put(
-  array_merge(
-    $config->get('servers'),
-    array(
-      'servers' => array(
+  array(
+    'servers' => array_merge(
+      $config->get('servers'),
+      array(
         'script' => '10.0.0.1',
         'media' => '10.0.0.2'
       )
