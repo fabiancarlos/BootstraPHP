@@ -11,9 +11,9 @@ Initiate the wonders.
 ```php
 <?php
 require_once 'Config.php';
-```
 
 $config = Config::getInstance();
+```
 
 Right of the bat, you can use all PHP INI settings.
 
