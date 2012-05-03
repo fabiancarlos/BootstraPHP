@@ -2,20 +2,34 @@
 /**
  * Parse configuration files.
  *
- * @package Joh Man X
+ * @package JohManX
  * @subpackage Configuration
  * @copyright 2012 Jan-Marten "Joh Man X" de Boer
  */
 
-class Config{
-  
+/**
+ * The configuration class.
+ */
+class Config {
+
+  /**
+   * An instance of Config.
+   *
+   * @var $_instance
+   */
   private static $_instance = null;
+
+  /**
+   * The configuration data.
+   *
+   * @var $_config
+   */
   private $_config = array();
-  
+
   /**
    * The construct.
    */
-  function __construct() {
+  private function __construct() {
     if (count($this->_config) === 0) {
       $this->_config = ini_get_all();
       $this->_config['config']['scanned_files'] = array_merge(
@@ -24,20 +38,23 @@ class Config{
       );
     }
   }
-  
+
   /**
    * Get an instance of self.
    *
    * Kudos to @doenietzomoeilijk
+   *
+   * @return object $_instance
    */
   public static function getInstance() {
     if (!isset(self::$_instance)) {
       $classname = __CLASS__;
       self::$_instance = new $classname;
     }
+
     return self::$_instance;
   }
-  
+
   /**
    * Checks if a file exists in the current path.
    *
@@ -49,28 +66,28 @@ class Config{
       return $file;
     } else {
       $paths = $this->get('include_path');
-      $global_paths = explode(':', $paths['global_value']);
-      $local_paths = explode(':', $paths['local_value']);
-      
-      $paths = array_unique(array_merge($global_paths, $local_paths));
+      $globalPaths = explode(':', $paths['global_value']);
+      $localPaths = explode(':', $paths['local_value']);
+
+      $paths = array_unique(array_merge($globalPaths, $localPaths));
       $paths = is_array($paths) ? $paths : array($paths);
-      
+
       foreach ($paths as $path) {
         if (file_exists($path . $file)) {
           return $path . $file;
         }
-      }  
+      }
     }
-    
+
     return false;
   }
-  
+
   /**
    * Parse an INI file.
    *
    * @param string|resource $file the file name or handler or content
    * @param boolean $return optional: return the parsed config
-   * @throws exception on parse failure
+   * @throws Exception on parse failure
    * @return void|array
    */
   public function parse($file, $return = false) {
@@ -79,7 +96,7 @@ class Config{
       $tmp = @tempnam('/tmp', 'Config_parse_tmp_');
       $stream = @fopen($tmp, 'w');
       $realSize = @stream_copy_to_stream($file, $stream);
-      
+
       if ($realSize) {
         $file = $tmp;
       } else {
@@ -87,15 +104,15 @@ class Config{
           'Unknown error occured while trying to read given resource handler.'
         );
       }
-    }  
-    
+    }
+
     $filename = $this->_fileInPath($file);
     if (is_string($file) && $filename) {
       $config = parse_ini_file($filename, true, INI_SCANNER_NORMAL);
     } elseif (is_string($file) && strrpos($file, ']')) {
       $config = parse_ini_string($file, true, INI_SCANNER_NORMAL);
     }
-    
+
     if (!isset($config) || $config === false || !is_array($config)) {
       throw new Exception(
         'Unknown error occured while parsing'
@@ -106,20 +123,19 @@ class Config{
         $this->_config,
         array_diff_assoc($this->_config, $config)
       );
-      
-      if (
-        $filename !== false
-        && !in_array($filename, $this->_config['config']['scanned_files'])
+
+      if ($filename !== false
+          && !in_array($filename, $this->_config['config']['scanned_files'])
       ) {
         $this->_config['config']['scanned_files'][] = $filename;
       }
     }
-    
+
     if ($return === true) {
       return $config;
     }
   }
-  
+
   /**
    * Read configuration data.
    *
@@ -128,7 +144,7 @@ class Config{
    */
   public function get($key = array()) {
     $config = array();
-  
+
     if (is_scalar($key) && array_key_exists($key, $this->_config)) {
       $config = $this->_config[$key];
     } elseif (is_array($key) && count($key)) {
@@ -142,14 +158,15 @@ class Config{
     } elseif (is_array($key)) {
       $config = $this->_config;
     }
-    
+
     return $config;
   }
-  
+
   /**
    * Put in specific configuration.
    *
    * @param array $config the configuration, expected in key => value pairs
+   * @return void
    */
   public function put(array $config = array()) {
     foreach ($config as $k => $v) {
@@ -158,7 +175,7 @@ class Config{
       }
     }
   }
-  
+
   /**
    * Get all config or a specific set in JSON.
    *
@@ -168,5 +185,5 @@ class Config{
   public function getJSON($key = array()) {
     return json_encode($this->get($key));
   }
-  
+
 }
