@@ -171,7 +171,8 @@ class Config {
   public function put(array $config = array()) {
     foreach ($config as $k => $v) {
       if (!empty($k)) {
-        $this->_config[$k] = $v;
+        $cv = $this->get($k);
+        $this->_config[$k] = array_merge($cv, $v);
       }
     }
   }

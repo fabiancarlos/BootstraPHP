@@ -98,22 +98,3 @@ So, if you ever want to see what config is available to you.
 <?php
 $availableConfig = array_keys($config->get());
 ```
-
-
-Now, because INI files should have the inherent nature of overwriting.
-If we want to add data to a deep config setting, we'll do:
-
-```php
-<?php
-$config->put(
-  array(
-    'servers' => array_merge(
-      $config->get('servers'),
-      array(
-        'script' => '10.0.0.1',
-        'media' => '10.0.0.2'
-      )
-    )
-  )
-);
-```

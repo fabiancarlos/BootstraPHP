@@ -2,7 +2,7 @@
 /**
  * Parse configuration files.
  *
- * @package Joh Man X
+ * @package JohManX
  * @subpackage Configuration
  * @copyright 2012 Jan-Marten "Joh Man X" de Boer
  */
@@ -12,16 +12,7 @@ require_once 'Config.php';
 $config = Config::getInstance();
 
 // Right of the bat, you can use all PHP INI settings.
-$include_path = $config->get('include_path');
-
-/*
-// Parse an additional INI file, somewhere in the PHP path.
-$config->parse('servers.ini');
-
-// Parse an open stream, if you so desire.
-$input = fopen('php://input', 'r');
-$config->parse($input);
-*/
+$includePath = $config->get('include_path');
 
 // You could also choose to directly parse an INI string.
 $config->parse(
@@ -49,19 +40,5 @@ $allTheThings = $config->get();
 
 // So, if you ever want to see what config is available to you.
 $availableConfig = array_keys($config->get());
-
-// Now, because INI files should have the inherent nature of overwriting.
-// If we want to add data to a deep config setting, we'll do.
-$config->put(
-  array(
-    'servers' => array_merge(
-      $config->get('servers'),
-      array(
-        'script' => '10.0.0.1',
-        'media' => '10.0.0.2'
-      )
-    )
-  )
-);
 
 var_dump($config->get('servers'));
