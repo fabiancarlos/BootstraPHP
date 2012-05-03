@@ -39,6 +39,6 @@ $parsedFilesJSON = $config->getJSON(array('config' => 'scanned_files'));
 $allTheThings = $config->get();
 
 // So, if you ever want to see what config is available to you.
-$availableConfig = array_keys($config->get());
+$availableConfig = $config->peek();
 
-var_dump($config->get('servers'));
+var_dump($availableConfig);

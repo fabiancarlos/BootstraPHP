@@ -98,3 +98,21 @@ So, if you ever want to see what config is available to you.
 <?php
 $availableConfig = array_keys($config->get());
 ```
+
+
+But we prefer a cleaner method.
+
+```php
+<?php
+$availableConfig = $config->peek();
+```
+
+
+Ofcourse this results in us also wanting to check individual config.
+
+```php
+<?php
+if ($config->defined('servers')) {
+  var_dump($config->get('servers'));
+}
+```

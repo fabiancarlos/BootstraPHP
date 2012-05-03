@@ -145,7 +145,7 @@ class Config {
   public function get($key = array()) {
     $config = array();
 
-    if (is_scalar($key) && array_key_exists($key, $this->_config)) {
+    if (is_scalar($key) && $this->defined($key)) {
       $config = $this->_config[$key];
     } elseif (is_array($key) && count($key)) {
       foreach ($key as $i => $k) {
@@ -185,6 +185,27 @@ class Config {
    */
   public function getJSON($key = array()) {
     return json_encode($this->get($key));
+  }
+
+  /**
+   * Check if a setting is defined.
+   *
+   * @param mixed $key the key that will be checked
+   * @return bool $defined
+   */
+  public function defined($key) {
+    $defined = array_key_exists($key, $this->_config);
+    return $defined;
+  }
+
+  /**
+   * List all the available config.
+   *
+   * @return array $config the defined config
+   */
+  public function peek() {
+    $config = array_keys($this->_config);
+    return $config;
   }
 
 }
