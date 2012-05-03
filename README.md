@@ -104,6 +104,7 @@ But we prefer a cleaner method.
 
 ```php
 <?php
+// Sorry, guys. list is reserved.
 $availableConfig = $config->peek();
 ```
 
