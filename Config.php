@@ -71,7 +71,7 @@ class Config {
    */
   public function __set($key, $value) {
     $data = array();
-    $data[$key] = is_array($value) ? $value : array($value);
+    $data[$key] = $value;
     $this->put($data);
   }
 
@@ -244,7 +244,11 @@ class Config {
     foreach ($config as $k => $v) {
       if (!empty($k)) {
         $cv = $this->get($k);
-        $this->_config[$k] = array_merge($cv, $v);
+        if (is_array($cv) && is_array($v)) {
+          $this->_config[$k] = array_merge($cv, $v);
+        } else {
+          $this->_config[$k] = $v;
+        }
       }
     }
   }
