@@ -127,7 +127,16 @@ Ofcourse this results in us also wanting to check individual config.
 
 ```php
 <?php
+// Could also be done by using isset($config->servers).
 if ($config->defined('servers')) {
+  // Could also be done by using $config->servers.
   var_dump($config->get('servers'));
 }
+```
+
+And when we, for some obscure reason, want to rid ourselves of config.
+
+```php
+<?php
+unset($config->servers);
 ```
