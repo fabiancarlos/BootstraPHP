@@ -168,3 +168,25 @@ if (HOST_TYPE === 'development') {
   var_dump($config);
 }
 ```
+
+And to see what damage that actually did.
+
+```php
+<?php
+var_dump(array_keys($config->constants['user']));
+```
+
+```
+array(5) {
+  [0]=>
+  string(12) "PCNTL_EXISTS"
+  [1]=>
+  string(7) "__DIR__"
+  [2]=>
+  string(9) "HOST_TYPE"
+  [3]=>
+  string(12) "DEFAULT_LANG"
+  [4]=>
+  string(21) "DEFAULT_LANG_FALLBACK"
+}
+```
