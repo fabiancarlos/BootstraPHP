@@ -1,6 +1,6 @@
 <?php
 /**
- * Parse configuration files.
+ * Bootstrap your PHP project of desire.
  *
  * @package BootstraPHP
  * @subpackage Bootstrap
