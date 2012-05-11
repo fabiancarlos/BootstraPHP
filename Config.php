@@ -71,7 +71,7 @@ class Config {
    */
   public function __set($key, $value) {
     $data = array();
-    $data[$key] = $value;
+    $data[$key] = is_array($value) ? $value : array($value);
     $this->put($data);
   }
 
