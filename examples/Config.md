@@ -140,3 +140,31 @@ And when we, for some obscure reason, want to rid ourselves of config.
 <?php
 unset($config->servers);
 ```
+
+Using constants
+===============
+
+Now, what if we actually wanted to use constants throughout our code? That's possible, but you should be wary of using this behaviour, since it potentially creates a lot of constants.
+For security, we exclude all values that are not scalar and were set when the Config automatically gathered data.
+
+Here's an example of a settings.ini file:
+
+```
+HOST_TYPE = development
+DEFAULT_LANG = nl
+DEFAULT_LANG_FALLBACK = en
+```
+
+Now let's use this data.
+
+```php
+<?php
+$config = Config::getInstance();
+$config->parse('settings.ini');
+$config->defineScalarConstants();
+
+if (HOST_TYPE === 'development') {
+  // Debug all the things.
+  var_dump($config);
+}
+```
