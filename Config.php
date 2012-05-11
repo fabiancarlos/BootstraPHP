@@ -31,11 +31,30 @@ class Config {
    */
   private function __construct() {
     if (count($this->_config) === 0) {
+      // Get ini settings.
       $this->_config = ini_get_all();
       $this->_config['config']['scanned_files'] = array_merge(
         array(php_ini_loaded_file()),
         (array) explode(',', php_ini_scanned_files())
       );
+
+      // Get constants.
+      $this->_config['constants'] = get_defined_constants(true);
+
+      // Get extensions.
+      $this->_config['extensions'] = array_fill_keys(
+        get_loaded_extensions(),
+        array()
+      );
+
+      foreach ($this->_config['extensions'] as $ext => $funcs) {
+        $this->_config['extensions'][$ext] = get_extension_funcs($ext);
+      }
+
+      // Get included files.
+      // Note: Files included using the auto_prepend_file directive
+      // are not included in the returned array.
+      $this->_config['config']['included_files'] = get_included_files();
     }
   }
 
