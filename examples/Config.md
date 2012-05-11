@@ -30,7 +30,11 @@ That also means we can do easy declarations.
 ```php
 <?php
 $config->HOST_TYPE = 'development';
-echo $config->HOST_TYPE; // returns: development
+
+if (isset($config->HOST_TYPE) && $config->HOST_TYPE === 'development') {
+  // Debug all the things!
+  var_dump($config);
+}
 ```
 
 
