@@ -31,6 +31,7 @@ class Config {
    */
   private function __construct() {
     $this->_doInternalCall();
+    $this->_config['config']['non_constants'] = $this->peek();
   }
 
   /**
@@ -290,6 +291,24 @@ class Config {
     }
 
     return true;
+  }
+
+  /**
+   * Define any scalar config as a constant.
+   *
+   * @return void
+   */
+  public function defineScalarConstants() {
+    $config = $this->get();
+
+    foreach ($config as $key => $value) {
+      if (is_scalar($value)
+          && !defined($key)
+          && !in_array($key, $this->_config['config']['non_constants'])
+      ) {
+        define($key, $value);
+      }
+    }
   }
 
   /**
