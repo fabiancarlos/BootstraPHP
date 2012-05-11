@@ -18,6 +18,21 @@ Right of the bat, you can use all PHP INI settings.
 $include_path = $config->get('include_path');
 ```
 
+It also supports the use of magical methods, so keeping it simple is a breeze.
+
+```php
+<?php
+$globalPath = $config->include_path['global_value'];
+```
+
+That also means we can do easy declarations.
+
+```php
+<?php
+$config->HOST_TYPE = 'development';
+echo $config->HOST_TYPE; // returns: development
+```
+
 
 Parse an additional INI file, somewhere in the PHP path.
 
