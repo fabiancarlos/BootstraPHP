@@ -38,24 +38,51 @@ class Config {
         (array) explode(',', php_ini_scanned_files())
       );
 
-      // Get constants.
-      $this->_config['constants'] = get_defined_constants(true);
-
-      // Get extensions.
-      $this->_config['extensions'] = array_fill_keys(
-        get_loaded_extensions(),
-        array()
-      );
-
-      foreach ($this->_config['extensions'] as $ext => $funcs) {
-        $this->_config['extensions'][$ext] = get_extension_funcs($ext);
-      }
-
-      // Get included files.
-      // Note: Files included using the auto_prepend_file directive
-      // are not included in the returned array.
-      $this->_config['config']['included_files'] = get_included_files();
+      $this->_doInternalCall();
     }
+  }
+
+  /**
+   * Perform a magic check on the existence of a config.
+   *
+   * @param string $key the key to check
+   * @return boolean
+   */
+  public function __isset($key) {
+    return $this->defined($key);
+  }
+
+  /**
+   * Do magical unsetting.
+   *
+   * @param string $key the key to unset
+   * @return void
+   */
+  public function __unset($key) {
+    unset($this->_config[$key]);
+  }
+
+  /**
+   * Do magical declaration of data.
+   *
+   * @param string $key the key to set data to
+   * @param mixed $value the value to set
+   * @return void
+   */
+  public function __set($key, $value) {
+    $data = array();
+    $data[$key] = $value;
+    $this->put($data);
+  }
+
+  /**
+   * Do magical getting of data.
+   *
+   * @param string $key the key to fetch data with.
+   * @return mixed
+   */
+  public function __get($key) {
+    return $this->get($key);
   }
 
   /**
@@ -156,12 +183,38 @@ class Config {
   }
 
   /**
+   * Do internal operations when a getter is called.
+   *
+   * @return void
+   */
+  private function _doInternalCall() {
+    // Get constants.
+    $this->_config['constants'] = get_defined_constants(true);
+
+    // Get extensions.
+    $this->_config['extensions'] = array_fill_keys(
+      get_loaded_extensions(),
+      array()
+    );
+
+    foreach ($this->_config['extensions'] as $ext => $funcs) {
+      $this->_config['extensions'][$ext] = get_extension_funcs($ext);
+    }
+
+    // Get included files.
+    // Note: Files included using the auto_prepend_file directive
+    // are not included in the returned array.
+    $this->_config['config']['included_files'] = get_included_files();
+  }
+
+  /**
    * Read configuration data.
    *
    * @param mixed $key optional key or keys to read from the config
    * @return mixed $config either an array or a scalar value
    */
   public function get($key = array()) {
+    $this->_doInternalCall();
     $config = array();
 
     if (is_scalar($key) && $this->defined($key)) {
@@ -213,6 +266,7 @@ class Config {
    * @return bool $defined
    */
   public function defined($key) {
+    $this->_doInternalCall();
     if (is_array($key)) {
       foreach ($key as $k => $v) {
         if (!array_key_exists($k, $this->_config)
@@ -234,6 +288,7 @@ class Config {
    * @return array $config the defined config
    */
   public function peek() {
+    $this->_doInternalCall();
     $config = array_keys($this->_config);
     return $config;
   }
