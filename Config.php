@@ -157,10 +157,7 @@ class Config {
         . ($filename !== false ? ' "' . $filename . '" as' : '') . ' INI.'
       );
     } else {
-      $this->_config = array_merge(
-        $this->_config,
-        array_diff_assoc($this->_config, $config)
-      );
+      $this->put($config);
 
       if ($filename !== false
           && !in_array($filename, $this->_config['config']['scanned_files'])
