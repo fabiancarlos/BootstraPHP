@@ -61,7 +61,7 @@ class Config {
    * @param string $file the file name
    * @return boolean|string $file either the path or false
    */
-  protected function fileInPath($file) {
+  public function fileInPath($file) {
     if (file_exists($file)) {
       return $file;
     } else {
