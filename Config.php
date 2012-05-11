@@ -190,12 +190,23 @@ class Config {
   /**
    * Check if a setting is defined.
    *
-   * @param mixed $key the key that will be checked
+   * @param mixed $key the key or keys that will be checked
    * @return bool $defined
    */
   public function defined($key) {
-    $defined = array_key_exists($key, $this->_config);
-    return $defined;
+    if (is_array($key)) {
+      foreach ($key as $k => $v) {
+        if (!array_key_exists($k, $this->_config)
+            || !array_key_exists($v, $this->_config[$k])
+        ) {
+          return false;
+        }
+      }
+    } else {
+      return array_key_exists($key, $this->_config);
+    }
+
+    return true;
   }
 
   /**
