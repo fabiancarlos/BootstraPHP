@@ -18,7 +18,7 @@ require_once 'Config.php';
 Config::getInstance()->put(
   array(
     'knownClassLocations' => array(
-      'Config' => __DIR__ . 'Config.php';
+      'Config' => __DIR__ . 'Config.php'
     )
   )
 );
