@@ -61,7 +61,7 @@ class Config {
    * @param string $file the file name
    * @return boolean|string $file either the path or false
    */
-  private function _fileInPath($file) {
+  protected function fileInPath($file) {
     if (file_exists($file)) {
       return $file;
     } else {
@@ -106,7 +106,7 @@ class Config {
       }
     }
 
-    $filename = $this->_fileInPath($file);
+    $filename = $this->fileInPath($file);
     if (is_string($file) && $filename) {
       $config = parse_ini_file($filename, true, INI_SCANNER_NORMAL);
     } elseif (is_string($file) && strrpos($file, ']')) {
