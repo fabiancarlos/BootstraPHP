@@ -30,16 +30,7 @@ class Config {
    * The construct.
    */
   private function __construct() {
-    if (count($this->_config) === 0) {
-      // Get ini settings.
-      $this->_config = ini_get_all();
-      $this->_config['config']['scanned_files'] = array_merge(
-        array(php_ini_loaded_file()),
-        (array) explode(',', php_ini_scanned_files())
-      );
-
-      $this->_doInternalCall();
-    }
+    $this->_doInternalCall();
   }
 
   /**
@@ -188,6 +179,21 @@ class Config {
    * @return void
    */
   private function _doInternalCall() {
+    // Get ini settings.
+    if (count($this->_config) === 0) {
+      $this->_config = ini_get_all();
+    }
+
+    // Get loaded configs.
+    if (!isset($this->_config['config'])
+        || !isset($this->_config['config']['scanned_files'])
+    ) {
+      $this->_config['config']['scanned_files'] = array_merge(
+        array(php_ini_loaded_file()),
+        (array) explode(',', php_ini_scanned_files())
+      );
+    }
+
     // Get constants.
     $this->_config['constants'] = get_defined_constants(true);
 
