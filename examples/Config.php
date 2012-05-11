@@ -2,7 +2,7 @@
 /**
  * Parse configuration files.
  *
- * @package JohManX
+ * @package BootstraPHP
  * @subpackage Configuration
  * @copyright 2012 Jan-Marten "Joh Man X" de Boer
  */
