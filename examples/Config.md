@@ -186,12 +186,10 @@ array(5) {
   [0]=>
   string(12) "PCNTL_EXISTS"
   [1]=>
-  string(7) "__DIR__"
-  [2]=>
   string(9) "HOST_TYPE"
-  [3]=>
+  [2]=>
   string(12) "DEFAULT_LANG"
-  [4]=>
+  [3]=>
   string(21) "DEFAULT_LANG_FALLBACK"
 }
 ```
