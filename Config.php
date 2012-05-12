@@ -319,4 +319,24 @@ class Config {
     return $config;
   }
 
+  /**
+   * Add a class file to the known locations.
+   *
+   * @param string $name the name for the class
+   * @param string $file the file for the class
+   * @return boolean $added when the file was added.
+   */
+  public function addClass($name, $file) {
+    if ($this->fileInPath($file)) {
+      $this->put(
+        array(
+          'knownClassLocations' => array($name => $file)
+        )
+      );
+      return true;
+    }
+
+    return false;
+  }
+
 }

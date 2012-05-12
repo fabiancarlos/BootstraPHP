@@ -1,5 +1,5 @@
-Example usage
-=============
+The basics
+==========
 
 Initiate the wonders.
 
@@ -37,6 +37,8 @@ if (isset($config->HOST_TYPE) && $config->HOST_TYPE === 'development') {
 }
 ```
 
+Parsing settings
+================
 
 Parse an additional INI file, somewhere in the PHP path.
 
@@ -74,6 +76,9 @@ media = 10.0.0.2'
 );
 ```
 
+
+Native methods
+==============
 
 Naturally, it's way more easy to simply put in some PHP.
 ```php
@@ -190,3 +195,32 @@ array(5) {
   string(21) "DEFAULT_LANG_FALLBACK"
 }
 ```
+
+Extending the autoloader
+========================
+
+Because we want to use the autoloader, waisting as little resources as possible, it's been made really easy to extend the known class locations.
+
+This can be done at any point in the script, if at least before loading the class in question.
+
+```php
+<?php
+$config->put(
+  array(
+    'knownClassLocations' => array(
+      'AlmightyClass' => __DIR__ . '/EpicGoodness.php'
+    )
+  )
+);
+```
+
+As per the behavior of `Config::put()`, the settings will be merged, rather than overwritten.
+
+Now, it would be more simple to have a dedicated method for this, so here goes.
+
+```php
+<?php
+$config->addClass('AlmightyClass', __DIR__ . '/EpicGoodness.php');
+```
+
+That one actually checks if the file exists before adding it to the list, preventing all sorts of mayhem later on.
