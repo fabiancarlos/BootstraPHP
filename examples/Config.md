@@ -223,4 +223,4 @@ Now, it would be more simple to have a dedicated method for this, so here goes.
 $config->addClass('AlmightyClass', __DIR__ . '/EpicGoodness.php');
 ```
 
-That one actually checks if the file exists before adding it to the list, preventing all sorts of mayhem later on.
+That one actually checks if the file exists somewhere in the PHP path before adding it to the list, preventing all sorts of mayhem later on.
