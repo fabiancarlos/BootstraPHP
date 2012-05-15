@@ -182,7 +182,7 @@ var_dump(array_keys($config->constants['user']));
 ```
 
 ```
-array(5) {
+array(4) {
   [0]=>
   string(12) "PCNTL_EXISTS"
   [1]=>
