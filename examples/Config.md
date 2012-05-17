@@ -232,21 +232,21 @@ $config->addClass('AlmightyClass', 'EpicGoodness.php', true);
 Public methods
 ==============
 
-- `Config::getInstance(void)` Get an instance of self, preventing redundant data.
-- `Config::fileInPath(string $file)` If the file is somewhere in the current PHP path, return that. Otherwise, fail by returning boolean false.
-- `Config::parse(mixed $file[, boolean $return = false])` Parse an ini file, blob or open file stream, optionally returning the INI settings as an associative array.
-- `Config::get(mixed $key = array())` Return any or all config data.
-- `Config::put(array $config = array())` Add, update or extend config data.
-- `Config::getJSON(mixed $key = array())` A JSON wrapper around the `get` method.
-- `Config::defined(mixed $key)` Check if a certain key is defined.
-- `Config::defineScalarConstants(void)` Automatically convert config to constants.
-- `Config::peek(void)` Lists all available config.
-- `Config::addClass(string $name, string $file[, boolean $checkfs = false])` Add a file location for a specific clas to the autoloader.
+- `object Config::getInstance(void)` Get an instance of self, preventing redundant data.
+- `string|boolean Config::fileInPath(string $file)` If the file is somewhere in the current PHP path, return that. Otherwise, fail by returning boolean false.
+- `void|array Config::parse(mixed $file[, boolean $return = false])` Parse an ini file, blob or open file stream, optionally returning the INI settings as an associative array. It throws an exception in parse fail.
+- `mixed Config::get(mixed $key = array())` Return any or all config data.
+- `void Config::put(array $config = array())` Add, update or extend config data.
+- `string Config::getJSON(mixed $key = array())` A JSON wrapper around the `get` method.
+- `boolean Config::defined(mixed $key)` Check if a certain key is defined.
+- `void Config::defineScalarConstants(void)` Automatically convert config to constants.
+- `array Config::peek(void)` Lists all available config.
+- `boolean Config::addClass(string $name, string $file[, boolean $checkfs = false])` Add a file location for a specific clas to the autoloader.
 
 Magic methods
 =============
 
-- `Config::__isset(string $key)` A wrapper around `Config::defined`, allowing `if (isset($config->someConfigThingy)) { ... }`.
-- `Config::__unset(string $key)` Enable the user to remove config through `unset($config->someConfigThingy)`.
-- `Config::__set(string $key, mixed $value)` Allow for `$config->someConfigThingy = 'some value';`.
-- `Config::__get(string $key)` Allow for `echo $config->someConfigThingy; // 'some value'`.
+- `boolean Config::__isset(string $key)` A wrapper around `Config::defined`, allowing `if (isset($config->someConfigThingy)) { ... }`.
+- `void Config::__unset(string $key)` Enable the user to remove config through `unset($config->someConfigThingy)`.
+- `void Config::__set(string $key, mixed $value)` Allow for `$config->someConfigThingy = 'some value';`.
+- `mixed Config::__get(string $key)` Allow for `echo $config->someConfigThingy; // 'some value'`.

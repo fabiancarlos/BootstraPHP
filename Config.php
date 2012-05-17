@@ -271,7 +271,7 @@ class Config {
    * Check if a setting is defined.
    *
    * @param mixed $key the key or keys that will be checked
-   * @return bool $defined
+   * @return boolean $defined
    */
   public function defined($key) {
     $this->_doInternalCall();
