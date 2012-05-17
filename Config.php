@@ -31,6 +31,7 @@ class Config {
    */
   private function __construct() {
     $this->_doInternalCall();
+    $this->_config['config']['checkOnAddClass'] = false;
     $this->_config['config']['non_constants'] = $this->peek();
   }
 
@@ -355,6 +356,13 @@ class Config {
    * @return boolean $added when the file was added.
    */
   public function addClass($name, $file, $checkfs = false) {
+    $args = func_get_args();
+
+    // Default value for $checkfs assumed.
+    if (!isset($args[2])) {
+      $checkfs = $this->checkOnAddClass;
+    }
+
     if (!$checkfs || $this->fileInPath($file)) {
       $this->put(
         array(

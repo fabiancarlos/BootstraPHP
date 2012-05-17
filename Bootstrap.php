@@ -15,9 +15,7 @@ if (@__DIR__ === '__DIR__') {
 
 // Settings required for the autoloader.
 require_once 'Config.php';
-Config::getInstance()->knownClassLocations = array(
-  'Config' => __DIR__ . '/Config.php'
-);
+Config::getInstance()->parse('settings.ini');
 
 /**
  * Create an auto loader for classes.
