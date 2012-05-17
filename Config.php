@@ -215,8 +215,8 @@ class Config {
         || !isset($this->_config['config']['scanned_files'])
     ) {
       $this->_config['config']['scanned_files'] = array_merge(
-        array(php_ini_loaded_file()),
-        (array) explode(',', php_ini_scanned_files())
+        array(trim(php_ini_loaded_file())),
+        array_map('trim', (array) explode(',', php_ini_scanned_files()))
       );
     }
 
