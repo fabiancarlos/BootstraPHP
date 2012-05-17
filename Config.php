@@ -324,10 +324,11 @@ class Config {
    *
    * @param string $name the name for the class
    * @param string $file the file for the class
+   * @param boolean $checkfs wether to check if the file exists or not
    * @return boolean $added when the file was added.
    */
-  public function addClass($name, $file) {
-    if ($this->fileInPath($file)) {
+  public function addClass($name, $file, $checkfs = false) {
+    if (!$checkfs || $this->fileInPath($file)) {
       $this->put(
         array(
           'knownClassLocations' => array($name => $file)

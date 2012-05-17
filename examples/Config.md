@@ -221,7 +221,13 @@ Now, it would be more simple to have a dedicated method for this, so here goes.
 $config->addClass('AlmightyClass', 'EpicGoodness.php');
 ```
 
-That one actually checks if the file exists somewhere in the PHP path before adding it to the list, preventing all sorts of mayhem later on.
+That one can check if the file exists somewhere in the PHP path before adding it to the list, preventing all sorts of mayhem later on.
+
+```php
+<?php
+// Only add if the file really exists.
+$config->addClass('AlmightyClass', 'EpicGoodness.php', true);
+```
 
 Public methods
 ==============
@@ -235,7 +241,7 @@ Public methods
 - `Config::defined(mixed $key)` Check if a certain key is defined.
 - `Config::defineScalarConstants(void)` Automatically convert config to constants.
 - `Config::peek(void)` Lists all available config.
-- `Config::addClass(string $name, string $file)` Add a file location for a specific clas to the autoloader.
+- `Config::addClass(string $name, string $file[, boolean $checkfs = false])` Add a file location for a specific clas to the autoloader.
 
 Magic methods
 =============
