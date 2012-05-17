@@ -240,7 +240,7 @@ Public methods
 Magic methods
 =============
 
-- `Config::__isset(string $key)` A wrapper around `Config::defined`, allowing `if (isset($config->someConfigThingy)) {`.
+- `Config::__isset(string $key)` A wrapper around `Config::defined`, allowing `if (isset($config->someConfigThingy)) { ... }`.
 - `Config::__unset(string $key)` Enable the user to remove config through `unset($config->someConfigThingy)`.
 - `Config::__set(string $key, mixed $value)` Allow for `$config->someConfigThingy = 'some value';`.
 - `Config::__get(string $key)` Allow for `echo $config->someConfigThingy; // 'some value'`.
