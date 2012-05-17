@@ -1,25 +1,3 @@
-Public methods
-==============
-
-- `Config::getInstance(void)` Get an instance of self, preventing redundant data.
-- `Config::fileInPath(string $file)` If the file is somewhere in the current PHP path, return that. Otherwise, fail by returning boolean false.
-- `Config::parse(mixed $file[, boolean $return = false])` Parse an ini file, blob or open file stream, optionally returning the INI settings as an associative array.
-- `Config::get(mixed $key = array())` Return any or all config data.
-- `Config::put(array $config = array())` Add, update or extend config data.
-- `Config::getJSON(mixed $key = array())` A JSON wrapper around the `get` method.
-- `Config::defined(mixed $key)` Check if a certain key is defined.
-- `Config::defineScalarConstants(void)` Automatically convert config to constants.
-- `Config::peek(void)` Lists all available config.
-- `Config::addClass(string $name, string $file)` Add a file location for a specific clas to the autoloader.
-
-Magic methods
-=============
-
-- `Config::__isset(string $key)` A wrapper around `Config::defined`, allowing `if (isset($config->someConfigThingy)) {`.
-- `Config::__unset(string $key)` Enable the user to remove config through `unset($config->someConfigThingy)`.
-- `Config::__set(string $key, mixed $value)` Allow for `$config->someConfigThingy = 'some value';`.
-- `Config::__get(string $key)` Allow for `echo $config->someConfigThingy; // 'some value'`.
-
 The basics
 ==========
 
@@ -244,3 +222,25 @@ $config->addClass('AlmightyClass', 'EpicGoodness.php');
 ```
 
 That one actually checks if the file exists somewhere in the PHP path before adding it to the list, preventing all sorts of mayhem later on.
+
+Public methods
+==============
+
+- `Config::getInstance(void)` Get an instance of self, preventing redundant data.
+- `Config::fileInPath(string $file)` If the file is somewhere in the current PHP path, return that. Otherwise, fail by returning boolean false.
+- `Config::parse(mixed $file[, boolean $return = false])` Parse an ini file, blob or open file stream, optionally returning the INI settings as an associative array.
+- `Config::get(mixed $key = array())` Return any or all config data.
+- `Config::put(array $config = array())` Add, update or extend config data.
+- `Config::getJSON(mixed $key = array())` A JSON wrapper around the `get` method.
+- `Config::defined(mixed $key)` Check if a certain key is defined.
+- `Config::defineScalarConstants(void)` Automatically convert config to constants.
+- `Config::peek(void)` Lists all available config.
+- `Config::addClass(string $name, string $file)` Add a file location for a specific clas to the autoloader.
+
+Magic methods
+=============
+
+- `Config::__isset(string $key)` A wrapper around `Config::defined`, allowing `if (isset($config->someConfigThingy)) {`.
+- `Config::__unset(string $key)` Enable the user to remove config through `unset($config->someConfigThingy)`.
+- `Config::__set(string $key, mixed $value)` Allow for `$config->someConfigThingy = 'some value';`.
+- `Config::__get(string $key)` Allow for `echo $config->someConfigThingy; // 'some value'`.
