@@ -232,8 +232,8 @@ $config->addClass('AlmightyClass', 'EpicGoodness.php', true);
 Public methods
 ==============
 
-- `<?php object Config::getInstance(void)` Get an instance of self, preventing redundant data.
-- `<? string|boolean Config::fileInPath(string $file)` If the file is somewhere in the current PHP path, return that. Otherwise, fail by returning boolean false.
+- `object Config::getInstance(void)` Get an instance of self, preventing redundant data.
+- `string|boolean Config::fileInPath(string $file)` If the file is somewhere in the current PHP path, return that. Otherwise, fail by returning boolean false.
 - `void|array Config::parse(mixed $file[, boolean $return = false])` Parse an ini file, blob or open file stream, optionally returning the INI settings as an associative array. It throws an exception on parse fail.
 - `mixed Config::get(mixed $key = array())` Return any or all config data.
 - `void Config::put(array $config = array())` Add, update or extend config data.
