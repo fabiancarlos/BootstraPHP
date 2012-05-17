@@ -250,3 +250,6 @@ Magic methods
 - `void Config::__unset(string $key)` Enable the user to remove config through `unset($config->someConfigThingy)`.
 - `void Config::__set(string $key, mixed $value)` Allow for `$config->someConfigThingy = 'some value';`.
 - `mixed Config::__get(string $key)` Allow for `echo $config->someConfigThingy; // 'some value'`.
+- `string Config::__toString(void)` Get the config as a serialized string.
+- `array Config::__sleep(void)` Returns what part will be serialized when doing `serialize($config)`.
+- `void Config::__wakeup` Do an internal call, to ensure settings are up to date.

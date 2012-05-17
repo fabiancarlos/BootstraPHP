@@ -78,6 +78,33 @@ class Config {
   }
 
   /**
+   * Make the config available as a serialized string.
+   *
+   * @return string $config the config data.
+   */
+  public function __toString() {
+    return serialize($this->get());
+  }
+
+  /**
+   * Restrict what part of the class can be serialized.
+   *
+   * @return array $config the config variable.
+   */
+  public function __sleep() {
+    return array('_config');
+  }
+
+  /**
+   * Make sure the config is up to date.
+   *
+   * @return void
+   */
+  public function __wakeup() {
+    $this->_doInternalCall();
+  }
+
+  /**
    * Get an instance of self.
    *
    * Kudos to @doenietzomoeilijk
